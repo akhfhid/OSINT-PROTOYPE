@@ -1,35 +1,56 @@
 # DarkCrawler 2.2 – Ethical Dark-Web OSINT Tool
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python: 3.6+](https://img.shields.io/badge/Python-3.6%2B-blue)](https://www.python.org/downloads/)
+[![Version: 2.2](https://img.shields.io/badge/Version-2.2-green)](https://github.com/akhfhid/osint-prototype/releases)
+
 ## Overview
-DarkCrawler is an open-source Python tool designed for ethical open-source intelligence (OSINT) gathering on dark-web (.onion) sites via the Tor network. It crawls specified .onion URLs, extracts content, classifies threats, and categorizes marketplace goods, generating detailed reports in JSON, CSV, and PDF formats. The tool supports both command-line and GUI modes for flexibility.
+
+DarkCrawler is a robust, open-source Python tool engineered for ethical open-source intelligence (OSINT) gathering on dark-web (.onion) sites via the Tor network. It systematically crawls specified .onion URLs, extracts textual content, classifies threats by severity, and categorizes marketplace goods, producing comprehensive reports in JSON, CSV, and PDF formats. Designed for flexibility, DarkCrawler supports both command-line and graphical user interface (GUI) modes, catering to security researchers, analysts, and threat intelligence professionals.
 
 - **Version**: 2.2
 - **Author**: Akhfhid
 - **License**: MIT
-- **Purpose**: To assist security researchers and analysts in ethically collecting and analyzing data from dark-web sites for threat intelligence.
+- **Purpose**: To enable ethical analysis of dark-web content for threat intelligence and security research.
 
-**Note**: This tool is intended for ethical and legal use only. Ensure compliance with all applicable laws and regulations.
+---
+
+## Ethical and Legal Considerations
+
+DarkCrawler is strictly intended for lawful and ethical OSINT activities, such as academic research, cybersecurity analysis, or authorized threat intelligence operations. Users are responsible for ensuring compliance with all applicable local, national, and international laws, including those governing data access and privacy. Unauthorized access to websites, collection of sensitive data without permission, or any misuse of this tool is expressly prohibited and may result in legal consequences. Always obtain explicit authorization from site owners before crawling.
+
+---
 
 ## Features
-- Crawls .onion sites with configurable depth and page limits.
-- Classifies threats into high, medium, and low severity based on predefined keywords.
-- Categorizes marketplace goods (e.g., digital goods, drugs, weapons).
-- Generates reports in JSON, CSV, and PDF formats.
-- Optional GUI for interactive crawling and report preview.
-- Tor integration for anonymous browsing with circuit renewal.
+
+- **Configurable Crawling**: Supports user-defined crawl depth (default: 2) and page limits (default: 50).
+- **Threat Classification**: Identifies high, medium, and low-severity threats using predefined keyword lists.
+- **Marketplace Analysis**: Categorizes goods into digital goods, fraud, drugs, weapons, and services.
+- **Multi-Format Reporting**: Generates detailed outputs in JSON, CSV, and PDF formats.
+- **Graphical Interface**: Provides an optional GUI for interactive URL input, real-time progress tracking, and report previews.
+- **Tor Integration**: Ensures anonymous crawling with automated circuit renewal via Tor’s control port.
+
+---
 
 ## Prerequisites
-- **Tor**: Install and configure the Tor service to enable access to .onion sites.
+
+To operate DarkCrawler, ensure the following are installed and configured:
+- **Tor**: Required for accessing .onion sites.
 - **Python**: Version 3.6 or higher.
-- **Dependencies**: Listed in `requirements.txt`.
+- **Dependencies**: Python libraries specified in `requirements.txt`.
+- **NLTK Data**: Required for text processing.
+
+---
 
 ## Installation
+
 1. **Install Tor**:
-   - On Linux: `sudo apt-get install tor`
-   - On macOS: `brew install tor`
-   - On Windows: Download and install from [Tor Project](https://www.torproject.org/download/).
-   - Start Tor and ensure it’s running on `127.0.0.1:9050` (default proxy port) and `127.0.0.1:9051` (default control port).
-   - Optionally, configure `HashedControlPassword` in `torrc` for control port authentication.
+   - **Linux**: Execute `sudo apt-get install tor`.
+   - **macOS**: Execute `brew install tor`.
+   - **Windows**: Download and install from the [Tor Project website](https://www.torproject.org/download/).
+   - Start the Tor service (e.g., `tor` on Linux/macOS or launch Tor Browser on Windows).
+   - Verify Tor is running on `127.0.0.1:9050` (proxy port) and `127.0.0.1:9051` (control port).
+   - Optional: Configure `HashedControlPassword` in the `torrc` file for enhanced control port security.
 
 2. **Clone the Repository**:
    ```bash
@@ -44,20 +65,23 @@ DarkCrawler is an open-source Python tool designed for ethical open-source intel
 
 4. **Download NLTK Data**:
    ```python
-   import nltk
-   nltk.download('punkt')
+   python3 -c "import nltk; nltk.download('punkt')"
    ```
 
+---
+
 ## Usage
-DarkCrawler can be run in two modes: command-line or GUI.
+
+DarkCrawler supports two operational modes: command-line and GUI. The script is named `osin.py`.
 
 ### Command-Line Mode
-Run the script with default settings (crawls safe example .onion URLs):
+
+Run with default settings (crawls predefined safe .onion URLs, e.g., DuckDuckGo’s .onion site):
 ```bash
 python3 osin.py
 ```
 
-Crawl specific .onion URLs:
+Crawl specific .onion URLs (comma-separated):
 ```bash
 python3 osin.py --urls http://example1.onion,http://example2.onion
 ```
@@ -67,38 +91,52 @@ Launch the GUI:
 python3 osin.py --gui
 ```
 
+**Command-Line Options**:
+| Option | Description | Example |
+|--------|-------------|---------|
+| `--gui` | Launches the graphical interface | `python3 osin.py --gui` |
+| `--urls` | Specifies comma-separated .onion URLs | `python3 osin.py --urls http://example1.onion,http://example2.onion` |
+
 ### GUI Mode
-- Launch the GUI with `--gui`.
-- Enter .onion URLs in the text box (one per line).
-- Click "Start Crawl" to begin.
-- View progress in the log and a summary in the "Report Preview" tab.
+
+- Execute `python3 osin.py --gui`.
+- Input .onion URLs in the provided text box (one URL per line).
+- Click **Start Crawl** to initiate the crawling process.
+- Monitor real-time progress in the log panel and view results in the **Report Preview** tab.
 
 ### Output Files
-- `darkweb_crawl_results.json`: Detailed crawl results in JSON format.
-- `darkweb_crawl_results.csv`: Summary table of crawled pages.
-- `darkweb_threat_report.pdf`: Threat intelligence report with summary statistics.
+
+DarkCrawler generates three output files:
+- `darkweb_crawl_results.json`: Comprehensive crawl data in JSON format.
+- `darkweb_crawl_results.csv`: Tabular summary of crawled pages.
+- `darkweb_threat_report.pdf`: Formatted threat intelligence report with summary statistics.
+
+---
 
 ### Sample Output
+
+Below are illustrative outputs showcasing a page with detected threats and marketplace goods.
+
 **JSON Output** (`darkweb_crawl_results.json`):
 ```json
 [
   {
-    "url": "http://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion",
-    "title": "DuckDuckGo Search Engine",
-    "text": "DuckDuckGo — Privacy, simplified. Search the web without being tracked...",
+    "url": "http://marketxyz.onion",
+    "title": "DarkWeb Marketplace",
+    "text": "Secure marketplace for credit cards, fullz, fake passports, and bank logs. Contact for CVV deals...",
     "threats": {
-      "high": [],
-      "medium": [],
+      "high": ["credit card fraud", "fullz", "cvv"],
+      "medium": ["fake passport", "bank logs"],
       "low": []
     },
     "marketplace_goods": {
-      "digital_goods": {},
-      "fraud": {},
+      "digital_goods": {"credit cards": 5, "cvv": 3, "fullz": 2, "bank logs": 1},
+      "fraud": {"fake passports": 4},
       "drugs": {},
       "weapons": {},
       "services": {}
     },
-    "crawl_time": "2025-09-16T11:56:00.123456"
+    "crawl_time": "2025-09-16T19:00:00.123456"
   }
 ]
 ```
@@ -106,33 +144,45 @@ python3 osin.py --gui
 **CSV Output** (`darkweb_crawl_results.csv`):
 ```csv
 URL,Title,Content,Threats,Marketplace Goods
-http://example.onion,Example Page,Example content snippet...,"{""high"": [], ""medium"": [], ""low"": []}","{""digital_goods"": {}, ""fraud"": {}, ""drugs"": {}, ""weapons"": {}, ""services"": {}}"
+http://marketxyz.onion,DarkWeb Marketplace,Secure marketplace for credit cards, fullz, fake passports...,"{""high"": [""credit card fraud"", ""fullz"", ""cvv""], ""medium"": [""fake passport"", ""bank logs""], ""low"": []}","{""digital_goods"": {""credit cards"": 5, ""cvv"": 3, ""fullz"": 2, ""bank logs"": 1}, ""fraud"": {""fake passports"": 4}, ""drugs"": {}, ""weapons"": {}, ""services"": {}}"
 ```
 
 **PDF Output** (`darkweb_threat_report.pdf`):
 ```
 DARKWEB THREAT INTELLIGENCE REPORT
-Generated: 2025-09-16 11:56:00
-Pages crawled: 1
-High threats: 0
-Medium threats: 0
-Low threats: 0
+Generated: 2025-09-16 19:00:00 UTC
+Pages Crawled: 1
+High Threats: 3
+Medium Threats: 2
+Low Threats: 0
 
-URL: http://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion
-Title: DuckDuckGo Search Engine
-Threats: {"high": [], "medium": [], "low": []}
+URL: http://marketxyz.onion
+Title: DarkWeb Marketplace
+Threats: {"high": ["credit card fraud", "fullz", "cvv"], "medium": ["fake passport", "bank logs"], "low": []}
 ```
 
-## Ethical Use
-DarkCrawler is designed for ethical OSINT purposes, such as security research and threat intelligence. Users must:
-- Comply with all applicable laws and regulations.
-- Avoid accessing or collecting data from sites without permission.
-- Use the tool responsibly to avoid harm or disruption.
+**GUI Preview** (Description):
+The GUI’s **Report Preview** tab renders an HTML summary, including:
+- Aggregate statistics: “High Threats: 3, Medium Threats: 2, Low Threats: 0”.
+- A clickable list of crawled pages, displaying titles, URLs, and associated threats.
+
+---
 
 ## Contributing
-Contributions are welcome! Please:
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/your-feature`).
-3. Commit changes (`git commit -m "Add your feature"`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a pull request.
+
+Contributions to DarkCrawler are encouraged. To contribute:
+1. Fork the repository: `https://github.com/akhfhid/osint-prototype`.
+2. Create a feature branch: `git checkout -b feature/your-feature`.
+3. Adhere to [PEP 8](https://www.python.org/dev/peps/pep-0008/) coding standards.
+4. Test changes locally with Tor running.
+5. Commit changes: `git commit -m "Add your feature"`.
+6. Push to the branch: `git push origin feature/your-feature`.
+7. Submit a pull request with a detailed description of changes.
+
+Please include unit tests for new features and update documentation as needed.
+
+---
+
+## License
+
+DarkCrawler is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
