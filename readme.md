@@ -4,7 +4,7 @@
 DarkCrawler is an open-source Python tool designed for ethical open-source intelligence (OSINT) gathering on dark-web (.onion) sites via the Tor network. It crawls specified .onion URLs, extracts content, classifies threats, and categorizes marketplace goods, generating detailed reports in JSON, CSV, and PDF formats. The tool supports both command-line and GUI modes for flexibility.
 
 - **Version**: 2.2
-- **Author**: [Your Name]
+- **Author**: Akhfhid
 - **License**: MIT
 - **Purpose**: To assist security researchers and analysts in ethically collecting and analyzing data from dark-web sites for threat intelligence.
 
@@ -33,8 +33,8 @@ DarkCrawler is an open-source Python tool designed for ethical open-source intel
 
 2. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/darkcrawler.git
-   cd darkcrawler
+   git clone https://github.com/akhfhid/osint-prototype.git
+   cd osint-prototype
    ```
 
 3. **Install Python Dependencies**:
@@ -54,17 +54,17 @@ DarkCrawler can be run in two modes: command-line or GUI.
 ### Command-Line Mode
 Run the script with default settings (crawls safe example .onion URLs):
 ```bash
-python3 darkcrawler.py
+python3 osin.py
 ```
 
 Crawl specific .onion URLs:
 ```bash
-python3 darkcrawler.py --urls http://example1.onion,http://example2.onion
+python3 osin.py --urls http://example1.onion,http://example2.onion
 ```
 
 Launch the GUI:
 ```bash
-python3 darkcrawler.py --gui
+python3 osin.py --gui
 ```
 
 ### GUI Mode
