@@ -1,7 +1,7 @@
 # DarkCrawler 2.2 – Ethical Dark-Web OSINT Tool
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python: 3.6+](https://img.shields.io/badge/Python-3.6%2B-blue)](https://www.python.org/downloads/)
+[![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/downloads/)
 [![Version: 2.2](https://img.shields.io/badge/Version-2.2-green)](https://github.com/akhfhid/osint-prototype/releases)
 
 ## Overview
