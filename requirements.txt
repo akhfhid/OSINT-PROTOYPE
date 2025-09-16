@@ -6,3 +6,4 @@ nltk==3.8.1
 pandas==2.2.2
 tqdm==4.66.5
 tkhtmlview==0.2.1
+socks=1.10
