@@ -3,7 +3,7 @@
 DarkCrawler 2.2 – Ethical dark-web OSINT through Tor
 Author: you
 Licence: MIT
-Usage: python3 darkcrawler.py  [--gui] [--urls u1.onion,u2.onion]
+Usage: python/python3 osin.py  [--gui] [--urls u1.onion,u2.onion]
 """
 
 import argparse, base64, csv, json, os, random, re, socket, sys, time, datetime
@@ -58,7 +58,6 @@ KEYWOARDS = {
     "low": ["premium accounts", "cracking", "hacking tutorial", "config", "combolist"],
 }
 
-# Marketplace categories
 MARKETPLACE_CATEGORIES = {
     "digital_goods": [
         "credit cards",
@@ -80,7 +79,7 @@ CRAWL_DELAY = (1, 4)
 RETRY = 3
 TIMEOUT = 20
 
-# Default seed URLs (safe examples)
+# Safe onion example
 DEFAULT_ONION_URLS = [
     "http://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion",
     "http://www.nytimes3xbfgragh.onion",
@@ -96,7 +95,7 @@ def new_tor_identity():
             c.signal(Signal.NEWNYM)
             time.sleep(2)
     except Exception as e:
-        print("[!] Could not renew Tor circuit:", e)
+        print("[!] Failed to renew Tor circuit:", e)
 
 
 def tor_session():
@@ -256,9 +255,6 @@ def save_pdf(results, fname="darkweb_threat_report.pdf"):
     pdf.output(fname)
 
 
-########################################
-# GUI (optional)
-########################################
 class CrawlerGUI(tk.Tk):
     def __init__(self, urls):
         super().__init__()
@@ -373,4 +369,4 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        sys.exit("\n[!] Aborted by user")
+        sys.exit("\n[!] Successfully interrupted.")
