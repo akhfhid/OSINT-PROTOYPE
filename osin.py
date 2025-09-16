@@ -177,7 +177,6 @@ def crawl(urls, max_depth=MAX_DEPTH, max_pages=MAX_PAGES, gui_queue=None):
         soup = BeautifulSoup(resp.text, "lxml")
         title = soup.title.string.strip() if soup.title else url
         text = soup.get_text(" ", strip=True)
-
         threats = classify_threats(text)
         goods = count_marketplace_goods(text)
 
@@ -222,7 +221,6 @@ def save_csv(results, fname="darkweb_crawl_results.csv"):
         )
     pd.DataFrame(rows).to_csv(fname, index=False)
 
-
 def save_pdf(results, fname="darkweb_threat_report.pdf"):
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
@@ -253,8 +251,7 @@ def save_pdf(results, fname="darkweb_threat_report.pdf"):
         pdf.multi_cell(0, 5, f"Threats: {json.dumps(r['threats'])}")
         pdf.ln(5)
 
-    pdf.output(fname)
-
+    pdf.output(fname
 
 class CrawlerGUI(tk.Tk):
     def __init__(self, urls):
@@ -341,7 +338,6 @@ class CrawlerGUI(tk.Tk):
         html += "</ol>"
         self.html.set_html(html)
 
-
 def main():
     parser = argparse.ArgumentParser(
         description="DarkCrawler 2.2 – Ethical dark-web crawler"
@@ -364,7 +360,7 @@ def main():
         save_csv(results)
         save_pdf(results)
         print("[+] Done – check darkweb_crawl_results.{json,csv,pdf}")
-
+ 
 
 if __name__ == "__main__":
     try:
