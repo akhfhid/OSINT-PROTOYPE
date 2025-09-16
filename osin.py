@@ -18,6 +18,7 @@ from tkinter import ttk, scrolledtext
 import pandas as pd
 from tqdm import tqdm
 
+
 TOR_PROXY = ("127.0.0.1", 9150)
 TOR_CTRL = ("127.0.0.1", 9051)
 TOR_CTRL_PWD = None  # set below if you enabled HashedControlPassword
